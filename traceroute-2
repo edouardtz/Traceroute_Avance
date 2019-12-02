@@ -1,0 +1,3 @@
+#!/bin/bash
+> traceroute.txt #Nettoyage du fichier contenant le résultat du script
+> traceroute.rte
