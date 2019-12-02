@@ -32,7 +32,7 @@ then
 	while [ $ttl != "$hops" ]; do
 
 for port in "67" "53" ; do
-	  test_standard=$(traceroute -A -n $1 -f $ttl -m $ttl -w 1 -p $port | tail -n 1 | awk '{print($2)}')
+	  test_standard=$(traceroute -n $1 -f $ttl -m $ttl -w 1 -p $port | tail -n 1 | awk '{print($2)}')
     if [ "$test_standard" != "*" ] ; then
       break
     fi
@@ -48,17 +48,15 @@ for port in "67" "53" ; do
         done
     		if [ "$test_tcp" == "*" ] ; then #TEST AVEC TCP
     			echo -e "$ttl Erreur" | tee -a traceroute.rte
-                break
           #~ A RESOUDRE : sortir si trop d'erreurs
     		else
-              if [ "$anti_dupli" == "$test_tcp" ]; then
-                break   
-              else
-                anti_dupli="$test_tcp"
-                echo "$anti_dupli"
-                echo -e "$ttl $test_tcp - TCP - Port $port" | tee -a traceroute.rte
-                (ttl=ttl+1))
-              fi
+          if [ "$anti_dupli" == "$test_tcp" ]; then
+            break
+          else
+            anti_dupli="$test_tcp"
+            echo -e "$ttl $test_tcp - TCP - Port $port" | tee -a traceroute.rte
+            ((ttl=ttl+1))
+          fi
     		fi
     	else
         if [ "$anti_dupli" == "$test_icmp" ]; then

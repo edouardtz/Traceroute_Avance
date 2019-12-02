@@ -1,6 +1,14 @@
 #!/bin/bash
 > traceroute.txt #Nettoyage du fichier contenant le résultat du script
 > traceroute.rte
+echo -e "\e[1;5;31m
+████████╗██████╗  █████╗  ██████╗███████╗██████╗  ██████╗ ██╗   ██╗████████╗███████╗
+╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██╔════╝██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝██╔════╝
+   ██║   ██████╔╝███████║██║     █████╗  ██████╔╝██║   ██║██║   ██║   ██║   █████╗
+   ██║   ██╔══██╗██╔══██║██║     ██╔══╝  ██╔══██╗██║   ██║██║   ██║   ██║   ██╔══╝
+   ██║   ██║  ██║██║  ██║╚██████╗███████╗██║  ██║╚██████╔╝╚██████╔╝   ██║   ███████╗
+   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝
+   \e[0m"
 ttl=1
 echo ""
 # Variables
@@ -19,7 +27,7 @@ while [ "$ttl" != "$hops" ] ; do
             if [ "$anti_doublon" == "$resultat" ] ; then
                 break
             else
-                echo "$ttl" "$resultat"| tee -a traceroute.rte
+                echo \"$ttl $resultat\"| tee -a traceroute.rte
                 ((pos=pos+1))
                 break
             fi
@@ -27,8 +35,8 @@ while [ "$ttl" != "$hops" ] ; do
             #echo "$ttl" "$resultat" "${options[pos]}"
             ((pos=pos+1))      
             if [ "${options[pos]}" == "end" ] ; then
-                echo $ttl "Not found" | tee -a traceroute.rte
-                 break              
+                echo \"$ttl "Not found"\" | tee -a traceroute.rte
+                break              
             fi
         fi
     done
