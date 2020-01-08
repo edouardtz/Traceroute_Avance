@@ -23,9 +23,9 @@ while [ "$ttl" != "$hops" ] ; do                                            # Bo
                 break   
             else
                 if [ "$ttl" != "1" ] ; then                                 # Condition si c'est la première ligne
-                    echo " -> " >> traceroute.txt
+                    echo " -> " >> $siteweb.txt
                 fi
-                echo " \" $ttl $resultat\" " >> traceroute.txt             # Stocker le résultat (si le résultat n'est pas nul et que ce n'est pas un doublon)
+                echo " \"$ttl $resultat\" " >> $siteweb.txt             # Stocker le résultat (si le résultat n'est pas nul et que ce n'est pas un doublon)
                 echo -e "\e[92m $ttl    \e[0m$resultat      "               # Afficher le résultat
                 ((arg=arg+1))                                               # Incrémentation de la position dans le tableau des options
                 break
@@ -34,8 +34,8 @@ while [ "$ttl" != "$hops" ] ; do                                            # Bo
             #echo "$ttl" "$resultat" "${options[arg]}"
             ((arg=arg+1))                                                   # Changement d'option traceroute  
             if [ "${options[arg]}" == "end" ] ; then                        # Si on arrive à la fin du tableau des options
-                echo "->" >> traceroute.txt                                 # Ecrire la flèche
-                echo "\" $ttl Not found \"" >> traceroute.txt               # Ecrire le résultat dans le fichier
+                echo "->" >> $siteweb.txt                                 # Ecrire la flèche
+                echo "\"$ttl Not found \"" >> $siteweb.txt                 # Ecrire le résultat dans le fichier
                 echo -e "\e[91m $ttl \e[0m" "¯\_(ツ)_/¯"                     # Afficher l'erreur
                 break
             fi
@@ -45,7 +45,9 @@ while [ "$ttl" != "$hops" ] ; do                                            # Bo
     arg="0"                                                                 # Réinitialiser la position dans le tableau
     anti_doublon="$resultat"                                                # Stockage du résultat pour comparer avec le résultat futur      
 done
-echo "->" \"$siteweb\" >> traceroute.txt                                   # Afficher l'adresse cible à la fin du graphe
+echo "->" \"$siteweb\" >> $siteweb.txt                                   # Afficher l'adresse cible à la fin du graphe
 ttl="1"
-
-
+#echo ""                                                 # Saut de ligne
+echo ";" >> $siteweb.txt                              # Fin du schéma dot
+tr -d '\n' < $siteweb.txt > $siteweb.rte              # Transformer . texte en dot sans les sauts de ligne
+#echo "}" >> $siteweb.rte                              # Terminer le fichier dot
