@@ -36,8 +36,8 @@ for siteweb in "${sites[@]}" ; do
     #masque=$(ipcalc $ipaddr | grep Netmask | awk '{print($4)}'  )              #Extraction du masque de sous-réseau  
     hops=$(traceroute $siteweb -w 1 | wc -l)                                    # Nombre de lignes du traceroute   
     #AS=$(traceroute -n -f $ttl -m $ttl -w 1 -q 1 $siteweb -A | tail -n 1 | awk '{print($3)}')
-    echo "AS : $AS"       
-    echo -e "\e[96m Cible :\e[0m" $siteweb "($ipaddr)" | column -t
+    echo ""       
+    echo -e "\e[96m Cible :\e[0m" $siteweb "($ipaddr)"
     while [ "$ttl" != "$hops" ] ; do                                            # Boucle Principale / s'arrête quand le nombre de hops calculé auparavant est atteint                                              
         while [ "$boucle" == '0' ]  ; do                                        # Boucle infinie tant que les conditions futures ne "breakent" pas
             resultat=$(traceroute -n -f $ttl -m $ttl -w 1 -q 1 $siteweb ${options[arg]} -A | tail -n 1 | awk '{print($2,$3)}')         #Résultat de la commande traceroute stockée, en fonction des options utilisées          
@@ -49,7 +49,7 @@ for siteweb in "${sites[@]}" ; do
                         echo " -> " >> traceroute.txt
                     fi
                     echo " \" $ttl $resultat\" " >> traceroute.txt             # Stocker le résultat (si le résultat n'est pas nul et que ce n'est pas un doublon)
-                    echo -e "\e[92m $ttl:\e[0m$resultat" | column -s : -t               # Afficher le résultat
+                    echo -e "\e[92m $ttl    \e[0m$resultat      "               # Afficher le résultat
                     ((arg=arg+1))                                               # Incrémentation de la position dans le tableau des options
                     break
                 fi
@@ -59,7 +59,7 @@ for siteweb in "${sites[@]}" ; do
                 if [ "${options[arg]}" == "end" ] ; then                        # Si on arrive à la fin du tableau des options
                     echo "->" >> traceroute.txt                                 # Ecrire la flèche
                     echo "\" $ttl Not found \"" >> traceroute.txt               # Ecrire le résultat dans le fichier
-                    echo -e "\e[91m $ttl \e[0m" "¯\_(ツ)_/¯" | column -t                # Afficher l'erreur
+                    echo -e "\e[91m $ttl \e[0m"     "¯\_(ツ)_/¯"                     # Afficher l'erreur
                     break
                 fi
             fi
@@ -68,7 +68,7 @@ for siteweb in "${sites[@]}" ; do
         arg="0"                                                                 # Réinitialiser la position dans le tableau
         anti_doublon="$resultat"                                                # Stockage du résultat pour comparer avec le résultat futur      
     done
-    #echo "->" \"$siteweb\" >> traceroute.txt                                    # Afficher l'adresse cible à la fin du graphe
+    echo "->" \"$siteweb\" >> traceroute.txt                                    # Afficher l'adresse cible à la fin du graphe
     ttl="1"
 done
 

@@ -1,14 +1,40 @@
 #!/bin/bash
 #script appelant les autres autant de fois que nécessaire
-rm *.txt
-rm *.rte
-rm *.dot
-
+rm -f *.txt
+rm -f *.rte
+rm -f *.dot
+pos="1"
+couleurs=(
+    "blue"
+    "red"
+    "green"
+    "cyan"
+    "black"
+    "violet"
+    "greenyellow"
+    "hotpink"
+    "magenta"
+    "orange"
+    "brown"
+    "yellow"
+    "crimson"
+    "gold"
+    "royalblue"
+    "forestgreen"
+    "grey"
+    "indigo"
+    "mediumspringgreen"
+    "break"
+    )
 sites=(
     "perdu.com"
+    "gov.za"
     "rt.unice.fr"
+    "africau.edu"
+    "zou.ac.zw"
     "cfasup-fc.com"
     "chine-nouvelle.com"
+    "news24.com"
     "mines-ales.fr"
     "iut.fr"
     "onisep.fr"
@@ -19,17 +45,21 @@ nbe_sites=${#sites[@]}
 incr=0
 echo "digraph traceroute { " > traceroute.dot
 
+
+
 while [ $incr != $nbe_sites ]; do
-    for cible in "${sites[@]}" ; do
-        ./traceroute.sh $cible
-        
+    for cible in "${sites[@]}" ; do  
+        ./traceroute.sh $cible ${couleurs[pos]}
+        ((pos=pos+1))
+        if [ ${couleurs[pos]} == "break" ] ; then
+            pos="1"
+        fi
         ((incr=incr+1))
     done
     for cible in "${sites[@]}" ; do
         cat $cible.rte >> traceroute.dot
         echo "" >> traceroute.dot    
-    done
-    
+    done   
 done
 echo "}" >> traceroute.dot
 dot -Tpdf traceroute.dot -o route.pdf
