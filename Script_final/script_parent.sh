@@ -28,17 +28,24 @@ couleurs=(
     )
 sites=(
     "perdu.com"
+    "kth.se"
+    "acu.edu.au"
     "gov.za"
+    "school.katsushika.ed.jp"
     "rt.unice.fr"
+    "sergeistrelec.ru"
+    "germaninstitute.de"
     "africau.edu"
     "zou.ac.zw"
     "cfasup-fc.com"
     "chine-nouvelle.com"
+    "swissboardinstitute.ch"
     "news24.com"
     "mines-ales.fr"
     "iut.fr"
     "onisep.fr"
     "global.bfsu.edu.cn"
+    "sib.swiss"
     )                           # Liste des adresses web a consulter
 
 nbe_sites=${#sites[@]}
