@@ -22,8 +22,9 @@ couleurs=(
 #   Liste des adresses web a consulter
 #   On peut y ajouter ou supprimer des entrées sans impacter le script
 sites=(
-    "kth.se"   "gov.za"    "school.katsushika.ed.jp"    "rt.unice.fr"    "sergeistrelec.ru"    
-    "germaninstitute.de"    "africau.edu"    "zou.ac.zw"    "cfasup-fc.com"    
+    # "kth.se"   
+    "gov.za"    "school.katsushika.ed.jp"    "rt.unice.fr"    "sergeistrelec.ru"    
+    "germaninstitute.de"    "africau.edu"    "cfasup-fc.com"    
     "chine-nouvelle.com"    "swissboardinstitute.ch"    "news24.com"    "mines-ales.fr"
     "iut.fr"    "onisep.fr"    "global.bfsu.edu.cn"    "sib.swiss"     
     "www.librarybrunei.gov.bn"      "guiaforte.com.br"      "www.pilersuisoq.gl"
@@ -47,13 +48,13 @@ while [ $incr != $nbe_sites ]; do                                               
     done
     for cible in "${sites[@]}" ; do                                             #   Pour chaque cible
         cat $cible.rte >> traceroute.dot                                        #   Transférer le contenu de chaque fichier individuel à la suite du fichier conteneur principal
-        echo "" >> traceroute.dot                                               #   Aller à la ligne dans entre chaque ajout dans le fichier conteneur principal
+        echo "" >> traceroute.dot                                               #   Aller à la ligne dans entre chaque ajout dans le fichier DOT
     done   
 done
 
 # - - - - - - - - - - ACHEVEMENT - - - - - - - - - - #
 
-echo "}" >> traceroute.dot                                                      #   Finir le fichier conteneur principal
+echo "}" >> traceroute.dot                                                      #   Finir le fichier DOT
 dot -Tpdf traceroute.dot -o route.pdf                                           #   Convertir le fichier conteneur principal en PDF a l'aide de DOT
 echo -e "\e[1;92m               » Succès ! «\e[0m"
 echo "Script exécuté en $(( ($SECONDS/60)%60 )) minute(s), $(($SECONDS%60 )) secondes."           #   Afficher un message de succès + temps d'éxécution total
