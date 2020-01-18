@@ -18,11 +18,11 @@ Il est composé de 2 scripts : script_parent.sh et traceroute.sh
 
 		## PRE-NETTOYAGE ##
 
-	-> Suppression des fichiers de stockage des résultats résiduels, si l'exécution précédente n'est pas arrivée à terme, pour recréer les fichiers un à un avec les nouvelles données.
+* Suppression des fichiers de stockage des résultats résiduels, si l'exécution précédente n'est pas arrivée à terme, pour recréer les fichiers un à un avec les nouvelles données.
 
 		## PREPARATION ##
 
-	-> Définition des variables et des listes de variables à utiliser en argument de l'exécution du script traceroute.sh.
+* Définition des variables et des listes de variables à utiliser en argument de l'exécution du script traceroute.sh.
 
 	La liste des couleurs permet de visualiser une couleur différente pour chaque route sur le graphe final. La dernière valeur de cette liste n'est pas une couleur mais un repère
 	pour permettre au script de revenir au début de la liste si le nombre de couleurs devenait insuffisant par rapport au nombre de cibles.
