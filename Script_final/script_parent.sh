@@ -26,7 +26,7 @@ sites=(
     "gov.za"    "school.katsushika.ed.jp"    "rt.unice.fr"    "sergeistrelec.ru"    
     "germaninstitute.de"    "africau.edu"    "cfasup-fc.com"    
     "chine-nouvelle.com"    "swissboardinstitute.ch"    "news24.com"    "mines-ales.fr"
-    "iut.fr"    "onisep.fr"    "global.bfsu.edu.cn"    "sib.swiss"     
+    "iut.fr"    "onisep.fr"    "sib.swiss"     
     "www.librarybrunei.gov.bn"      "guiaforte.com.br"      "www.pilersuisoq.gl"
     "hostel.is"
     )                           
